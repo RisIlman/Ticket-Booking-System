@@ -157,3 +157,35 @@ def selectSeats() :
     booked_seats.extend(selected_seats)
 
     return selected_seats, total_price
+
+
+def selectBeverages():
+    while True:
+        answer = input("Would you like to purchase beverages? (yes/no): ").strip().lower()
+
+        if answer == "yes" :
+            break
+        elif answer == "no" :
+            return "No beverage", 0.00
+        else :
+            print("Invalid choice. Please enter yes or no.")
+
+    beverages = {
+        "1": ("Coca-Cola", 5.00),
+        "2": ("Pepsi", 5.00),
+        "3": ("Mineral Water", 3.00)
+    }
+
+    print("\n========== BEVERAGES ==========")
+    print("1. Coca-Cola      - RM5.00")
+    print("2. Pepsi          - RM5.00")
+    print("3. Mineral Water  - RM3.00")
+
+    while True :
+        choice = input("Choose your beverage (1-3) : ")
+
+        if choice in beverages :
+            beverage_name, beverage_price = beverages[choice]
+            return beverage_name, beverage_price
+        else:
+            print("Invalid choice. Please select a valid beverage option.")
