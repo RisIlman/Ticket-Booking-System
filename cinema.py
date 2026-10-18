@@ -73,3 +73,87 @@ def selectSeats() :
         for seat_num in range(1, seats_per_row + 1):
             seat = row_letter + str(seat_num)
             all_seats.append(seat)
+
+    def displaySeats():
+        print("\n========== CINEMA SEATS ==========")
+        print("SCREEN".center(6 +seats_per_row * 5) + "\n")
+
+        print(" " * 6, end="")
+        for seat_num in range(1, seats_per_row + 1):
+            print(f"{seat_num:^5}", end="")
+        print("\n")
+
+        for row in range(rows):
+            row_letter = chr(65 + row)
+            print(f"Row {row_letter} ", end="")
+
+            for seat_num in range(1, seats_per_row + 1):
+                seat = row_letter + str(seat_num)
+
+                if seat in booked_seats:
+                    symbol = "[X]"
+                elif seat in selected_seats :
+                    symbol = "[S]"
+                else:
+                    symbol = "[ ]"
+
+                print(f"{symbol:^5}", end="")
+
+            if row < 3 :
+                print(" Premium")
+            else :
+                print(" Basic")
+
+        print("\n[X] = Booked")
+        print("[S] = Your Selection")
+        print("[ ] = Available")
+        print(f"Premium (Rows A-C) : RM {premium_price:.2f}")
+        print(f"Basic (Rows D-E) : RM {basic_price:.2f}")
+
+    available_count = len(all_seats) - len(booked_seats)
+
+    while True :
+        try :
+            num_seats = int(input("\nNumber of seats to book (1-5) : "))
+
+            if num_seats <= 0 or num_seats > 5:
+                print("Please select between 1 and 5 seats.")
+            elif num_seats > available_count :
+                print(f"Only {available_count} seats are available. Please enter again.")
+            else:
+                break
+
+        except ValueError :
+            print("Please enter a valid number.")
+
+    while len(selected_seats) < num_seats :
+        displaySeats()
+        seat_choice = input(f"\nSelect seat {len(selected_seats) + 1} (e.g., A1, B3) : ").upper()
+
+        if seat_choice in booked_seats :
+            print("Sorry, that seat is already booked. Please choose another seat.")
+        elif seat_choice not in all_seats :
+            print("Invalid seat selection. Please choose a valid seat.")
+        elif seat_choice in selected_seats :
+            print("You have already selected that seat. Please choose another seat.")
+        else :
+            selected_seats.append(seat_choice)
+            print(f"Seat {seat_choice} has been added to your selection.")
+
+    total_price = 0
+
+    for seat in selected_seats :
+        row_letter = seat[0]
+
+        if row_letter in ["A", "B", "C"] :
+            price = premium_price
+            seat_type = "Premium"
+        else : 
+            price = basic_price
+            seat_type = "Basic"
+
+        total_price += price
+
+    booked_seats.extend(selected_seats)
+
+    return selected_seats, total_price
