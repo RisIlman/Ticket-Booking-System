@@ -189,3 +189,29 @@ def selectBeverages():
             return beverage_name, beverage_price
         else:
             print("Invalid choice. Please select a valid beverage option.")
+
+
+def main():
+    print ("Welcome to the STARLINE CINEMA Ticket Booking System!")
+    print ()
+
+    movie = displayMovies()
+    print()
+    showtime = selectShowtime()
+    print()
+    selected_seats, total_price = selectSeats()
+    print(0)
+    beverage_name, beverage_price = selectBeverages()
+    print()
+
+    grand_total = total_price + beverage_price
+
+    print("\n========== BOOKING SUMMARY ==========")
+    print(f"Movie      : {movie}")
+    print(f"Showtime   : {showtime}")
+    print(f"Seats      : {', '.join(selected_seats)}")
+    print(f"Total Price: RM{total_price:.2f}")
+    print(f"Beverage   : {beverage_name} (RM {beverage_price:.2f})")
+    print(f"Grand Total: RM{grand_total:.2f}")
+    print()
+    print("Thank you for booking with STARLINE CINEMA! Enjoy your movie!")
