@@ -25,7 +25,7 @@ def displayMovies() :
         except ValueError:
             print("Please enter a number.")
 
-            
+
 def selectShowtime() :
     print ("=== Available Showtimes ===")
     print ("1. 10:00 AM")
@@ -52,3 +52,24 @@ def selectShowtime() :
 
         except ValueError:
             print("Please enter a number.")
+
+
+def selectSeats() :
+    print ("=== Seat Selection ===")
+
+    rows = 5
+    seats_per_row = 6
+
+    basic_price = 15.00
+    premium_price = 20.00
+
+    booked_seats = ["A3", "B5", "C3", "D1", "E6"]
+    selected_seats = []
+    all_seats = []
+
+    for row in range(rows):
+        row_letter = chr(65 + row)
+
+        for seat_num in range(1, seats_per_row + 1):
+            seat = row_letter + str(seat_num)
+            all_seats.append(seat)
