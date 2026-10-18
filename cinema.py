@@ -215,3 +215,7 @@ def main():
     print(f"Grand Total: RM{grand_total:.2f}")
     print()
     print("Thank you for booking with STARLINE CINEMA! Enjoy your movie!")
+
+
+if __name__ == "__main__" :
+    main()
